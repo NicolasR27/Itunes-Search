@@ -6,7 +6,7 @@ struct Result: Codable {
     let trackName: String
     let releaseDate: String
     let primaryGenreName: String
-    let trackPrice: Int
+    let trackPrice: Double
     
     enum CodingKeys: String, CodingKey {
         case trackId

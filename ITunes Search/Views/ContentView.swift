@@ -30,6 +30,11 @@ struct ContentView: View {
                                 Text(item.artistName)
                                     .font(.headline)
                                 Text(item.primaryGenreName)
+                                Text(item.trackName)
+                                Text(item.releaseDate)
+                               
+                                
+                                
                             }
                         }
                         .listStyle(PlainListStyle())
