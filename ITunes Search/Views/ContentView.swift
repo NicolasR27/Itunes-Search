@@ -1,14 +1,14 @@
-
 import SwiftUI
 
 struct ContentView: View {
     
-    @State var results = [Result]()
+    @StateObject private var artistsViewModel = ArtistsViewModel()
     @State var searchText: String = ""
     
     var body: some View {
         NavigationView{
             VStack {
+                
                 HStack {
                     TextField("Search", text: $searchText)
                         .padding(7)
@@ -21,20 +21,16 @@ struct ContentView: View {
                     })
                 }
                 
-                Spacer()
-                
                 Group {
-                    if results.count > 0 {
-                        List(results, id:\.trackId) { item in
-                            VStack(alignment: .leading) {
-                                Text(item.artistName)
-                                    .font(.headline)
-                                Text(item.primaryGenreName)
-                                Text(item.trackName)
-                                Text(item.releaseDate)
-                               
-                                
-                                
+                    if let artists = artistsViewModel.artists {
+                        List {
+                            ForEach(artists, id:\.id) { artist in
+                                VStack {
+                                    Text("\(artist.name)")
+                                    Text("\(artist.price)")
+                                    Text("\(artist.genre)")
+                                    Text("\(artist.Date)")
+                                }
                             }
                         }
                         .listStyle(PlainListStyle())
@@ -47,33 +43,14 @@ struct ContentView: View {
     }
     
     func loadData(searchString: String){
-       
         let formatedSearchString = searchString.replacingOccurrences(of: " ", with: "+")
-        guard let url = URL(string: "https://itunes.apple.com/search?term=\(formatedSearchString)")
-        else {
-            print("invalid url")
-            return
-        }
-        
-        let request = URLRequest(url: url)
-        URLSession.shared.dataTask(with: request) { data,reponse,error in
-            if let data = data {
-                if let decodedResponse = try?
-                    JSONDecoder().decode(Response.self,from:data){
-                    DispatchQueue.main.async {
-                        self.results = decodedResponse.results
-                    }
-                    return
-                }
-            }
-            print("fetch failed:\(error?.localizedDescription ?? "unknown")")
-        }.resume()
+        artistsViewModel.getData(searchString: formatedSearchString)
     }
 }
-
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
     }
 }
+

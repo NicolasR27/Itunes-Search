@@ -5,7 +5,8 @@ import SwiftUI
 struct ITunes_SearchApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+           ContentView()
+          // LoadingView()
         }
     }
 }
