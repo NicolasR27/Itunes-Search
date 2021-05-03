@@ -116,8 +116,8 @@
 		3E39F901263A82DC00B9B076 /* ITunes Search */ = {
 			isa = PBXGroup;
 			children = (
-				3E0A8BFC263D640B0084E8C3 /* Views */,
 				3E0A8BFA263D63F00084E8C3 /* Model */,
+				3E0A8BFC263D640B0084E8C3 /* Views */,
 				3E39F902263A82DC00B9B076 /* ITunes_SearchApp.swift */,
 				3E39F906263A82DC00B9B076 /* Assets.xcassets */,
 				3E39F90B263A82DC00B9B076 /* Info.plist */,
